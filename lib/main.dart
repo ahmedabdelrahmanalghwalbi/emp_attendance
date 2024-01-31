@@ -1,7 +1,9 @@
 import 'package:emp_attendance/app.dart';
 import 'package:emp_attendance/config/managers/string_manager.dart';
+import 'package:emp_attendance/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -19,5 +21,11 @@ void main() async {
   );
   //to ensure that all event inside event loop has ended
   await Future.delayed(Duration.zero);
-  runApp(const MyApp());
+
+  runApp(MultiProvider(
+    providers: [
+      Provider<AuthService>(create: (_) => AuthService()),
+    ],
+    child: const MyApp(),
+  ));
 }
