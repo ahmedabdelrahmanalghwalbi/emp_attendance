@@ -1,6 +1,8 @@
 import 'package:emp_attendance/app.dart';
 import 'package:emp_attendance/config/managers/string_manager.dart';
 import 'package:emp_attendance/services/auth_service.dart';
+import 'package:emp_attendance/services/db_services/attendace_service.dart';
+import 'package:emp_attendance/services/db_services/employee_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +26,9 @@ void main() async {
 
   runApp(MultiProvider(
     providers: [
-      Provider<AuthService>(create: (_) => AuthService()),
+      ChangeNotifierProvider(create: (context) => AuthService()),
+      ChangeNotifierProvider(create: (context) => EmployeeService()),
+      ChangeNotifierProvider(create: (context) => AttendanceService()),
     ],
     child: const MyApp(),
   ));

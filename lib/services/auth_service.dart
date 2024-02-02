@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:emp_attendance/screens/login_screen/login_screen.dart';
+import 'package:emp_attendance/services/db_services/employee_service.dart';
 import 'package:emp_attendance/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -8,6 +9,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthService extends ChangeNotifier {
   //intializa instance from supabase client
   final SupabaseClient supabaseClient;
+  //intialize instance from the Employee Database Service
   //intialize stream subscription on user authentication state changes
   StreamSubscription? authSubscription;
   //loading variable that represent on the status of loading
@@ -54,9 +56,22 @@ class AuthService extends ChangeNotifier {
     }
     try {
       setBoolValue = true;
-      AuthResponse response =
+      AuthResponse? response =
           await supabaseClient.auth.signUp(password: password, email: email);
       setBoolValue = false;
+      // if register successfully , then i will create new employee inside employee table
+      if (response.user != null) {
+        await EmployeeService.insertEmployee(
+                email: email, id: response.user!.id)
+            .then((_) async {
+          Utils.showSnackBar("Successfully registered !", context,
+              color: Colors.green);
+          await login(email: email, password: password, context: context);
+          if (context.mounted) {
+            Navigator.pop(context);
+          }
+        });
+      }
     } catch (ex) {
       setBoolValue = false;
       if (context.mounted) {
