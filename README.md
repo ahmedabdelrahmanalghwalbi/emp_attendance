@@ -1,16 +1,21 @@
 # emp_attendance
 
-A new Flutter project.
+A Flutter project for managing employee attendance using Supabase.
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+This project is a mobile application developed using Flutter for managing employee attendance. It utilizes Supabase, a cloud database service, for storing and managing data related to employee attendance records.
 
-A few resources to get you started if this is your first Flutter project:
+## Dependencies
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter SDK: >=3.2.5 <4.0.0
+- cupertino_icons: ^1.0.2
+- supabase_flutter: ^2.3.1
+- flutter_dotenv: ^5.1.0
+- provider: ^6.1.1
+- font_awesome_flutter: ^10.7.0
+- uuid: ^4.3.3
+- slide_to_act: ^2.0.2
+- intl: ^0.19.0
+- simple_month_year_picker: ^1.0.5
+- location: ^5.0.3
